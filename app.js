@@ -8,15 +8,28 @@ const exphbs = require('express-handlebars')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+const restaurants = require('./restaurant.json')
+
 // Set static files
 app.use(express.static('public'))
 
 
-// Initialize Project
+// Landing page
 app.get('/', (req, res) => {
-  res.render('index')
+  res.render('index', {
+    style: 'index.css'
+  })
 })
 
+// Restaurant description
+app.get('/restaurants/1', (req, res) => {
+  res.render('show', {
+    style: 'show.css'
+  })
+})
+
+
+// Listen request and start server
 app.listen(port, () => {
   console.log('It\'s a sood start')
 })

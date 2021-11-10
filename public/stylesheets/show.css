@@ -8,6 +8,8 @@ header {
 
 .navbar .navbar-brand:hover {
   color: #226089;
+  position: sticky;
+  top: 0;
 }
 
 .banner {
