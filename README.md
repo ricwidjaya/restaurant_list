@@ -6,7 +6,6 @@
 
 Foodies is a web app built with Express.js and Node.js that allows you to view restaurants we recommend.
 
-![Uploading Screen Shot 2021-11-11 at 16.36.08.png…]()
 
 ## Features
 
