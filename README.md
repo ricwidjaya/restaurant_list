@@ -1,9 +1,11 @@
 # Foodies
 ## _Visit the restaurant we love_
 
-![Build Status](https://img.shields.io/badge/version-1.0.0-green)
+<img width="1440" alt="Screen Shot 2021-11-11 at 16 36 08" src="https://user-images.githubusercontent.com/43133690/141269712-2cb14288-3814-4e0b-a3d7-332bc3aa46cf.png">
+
 
 Foodies is a web app built with Express.js and Node.js that allows you to view restaurants we recommend.
+
 
 ## Features
 
@@ -14,7 +16,7 @@ Foodies is a web app built with Express.js and Node.js that allows you to view r
 ## Getting Start
 
 ### Environment Setup
-1. [Node.js](https://nodejs.org/en/) 16 LTS
+1. [Node.js](https://nodejs.org/en/) v16 LTS
 
 ### Installing
 
