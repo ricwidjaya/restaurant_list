@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const routes = require('./routes')
 
 // Set template engine to "Handlebars"
 const exphbs = require('express-handlebars')
@@ -15,39 +16,8 @@ const restaurants = require('./restaurant.json').results
 app.use(express.static('public'))
 
 
-// Landing Page
-app.get('/', (req, res) => {
-  res.render('index', {
-    style: 'index.css',
-    restaurant: restaurants
-  })
-})
-
-// Restaurant info
-app.get('/restaurants/:id', (req, res) => {
-  const id = req.params.id
-  const restaurant = restaurants.find(restaurant => restaurant.id.toString() === id)
-
-  res.render('show', {
-    style: 'show.css',
-    restaurant: restaurant
-  })
-})
-
-// Search page
-app.get('/search', (req, res) => {
-  const keyword = req.query.keyword.toLowerCase()
-
-  // Search restaurant's name or category
-  const filteredRestaurant = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword) ||
-    restaurant.category.toLowerCase().includes(keyword))
-
-  res.render('index', {
-    style: 'index.css',
-    restaurant: filteredRestaurant,
-    keyword: keyword
-  })
-})
+// Routers
+app.use(routes)
 
 
 
