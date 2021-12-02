@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
+require('./config/mongoose')
 const routes = require('./routes')
 
 // Set template engine to "Handlebars"
