@@ -39,7 +39,8 @@ app.get('/search', (req, res) => {
   const keyword = req.query.keyword.toLowerCase()
 
   // Search restaurant's name or category
-  const filteredRestaurant = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword) || restaurant.category.toLowerCase().includes(keyword))
+  const filteredRestaurant = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword) ||
+    restaurant.category.toLowerCase().includes(keyword))
 
   res.render('index', {
     style: 'index.css',

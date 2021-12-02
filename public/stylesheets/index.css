@@ -20,6 +20,8 @@ header {
   filter: blur(3px);
 }
 
+
+
 .search-bar .search-bar-outer {
   margin: 0 auto;
   max-width: 680px;
@@ -27,7 +29,7 @@ header {
   border-radius: 8px;
   padding: 20px 30px;
   border: 0;
-  margin-top: -60px;
+  margin-top: -120px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -71,7 +73,7 @@ header {
 
 .restaurant-show-title {
   position: relative;
-  top: -100px;
+  top: -150px;
   color: white;
   text-align: center;
   font-size: 3rem;
