@@ -1,17 +1,21 @@
 const express = require('express')
 const router = express.Router()
 
-const restaurants = require('../../restaurant.json').results
+const Restaurant = require('../../models/restaurant')
+
 
 // Restaurant info
 router.get('/:id', (req, res) => {
   const id = req.params.id
-  const restaurant = restaurants.find(restaurant => restaurant.id.toString() === id)
-
-  res.render('show', {
-    style: 'show.css',
-    restaurant: restaurant
-  })
+  Restaurant.findOne({ _id: id })
+    .lean()
+    .then((restaurant) => {
+      console.log(restaurant)
+      res.render('show', {
+        style: 'show.css',
+        restaurant: restaurant
+      })
+    })
 })
 
 
