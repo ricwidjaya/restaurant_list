@@ -2,11 +2,11 @@ const express = require('express')
 const router = express.Router()
 
 const Restaurant = require('../../models/restaurant')
-const restaurants = require('../../restaurant.json').results
 
 router.get('/', (req, res) => {
   Restaurant.find()
     .lean()
+    .sort({ _id: 'desc' }) // new restaurant shows first
     .then(restaurants => {
       // Change MongoDB ObjectId into string
       restaurants.forEach(restaurant => {

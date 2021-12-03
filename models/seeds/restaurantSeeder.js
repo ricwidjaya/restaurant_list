@@ -1,5 +1,5 @@
 const db = require('../../config/mongoose')
-const Restaurant = require('../restaurants')
+const Restaurant = require('../restaurant')
 
 const seeds = [
   {
