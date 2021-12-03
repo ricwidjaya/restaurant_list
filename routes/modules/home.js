@@ -1,13 +1,28 @@
 const express = require('express')
 const router = express.Router()
 
+const Restaurant = require('../../models/restaurant')
 const restaurants = require('../../restaurant.json').results
 
 router.get('/', (req, res) => {
-  res.render('index', {
-    style: 'index.css',
-    restaurant: restaurants
-  })
+  Restaurant.find()
+    .lean()
+    .then(restaurants => {
+      // Change MongoDB ObjectId into string
+      restaurants.forEach(restaurant => {
+        restaurant._id = restaurant._id.toString()
+      })
+      return restaurants
+    })
+    .then((restaurants) => {
+      res.render('index', {
+        style: 'index.css',
+        restaurant: restaurants
+      })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 })
 
 // Search feature
