@@ -7,7 +7,8 @@ const Restaurant = require('../../models/restaurant')
 // Restaurant create page
 router.get('/create', (req, res) => {
   res.render('create', {
-    style: 'create.css'
+    style: 'create.css',
+    script: 'create.js'
   })
 })
 

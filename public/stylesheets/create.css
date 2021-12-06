@@ -1,0 +1,18 @@
+
+
+.banner {
+  height: 720px;
+}
+
+form {
+  margin-top: -60%;
+
+  /* Background style */
+  background-color: rgba(255, 254, 254);
+  padding: 2rem 3rem;
+  border-radius: 25px;
+}
+
+.radio {
+  display: none;
+}
