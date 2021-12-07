@@ -7,11 +7,13 @@ const routes = require('./routes')
 
 // Set template engine to "Handlebars"
 const exphbs = require('express-handlebars')
+const { urlencoded } = require('express')
+const { options } = require('./routes')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-// Load restaurant data
-const restaurants = require('./restaurant.json').results
+// Set body parser
+app.use(express.urlencoded({ extended: true }))
 
 // Set static files
 app.use(express.static('public'))

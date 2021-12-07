@@ -22,9 +22,6 @@ const Restaurant = new Schema({
   phone: {
     type: String
   },
-  google_map: {
-    type: String
-  },
   rating: {
     type: Number,
     required: true

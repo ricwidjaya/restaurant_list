@@ -7,3 +7,8 @@
 .restaurant-show-title {
   top: -100px;
 }
+
+.boxes {
+  display: flex;
+  gap: 2rem;
+}

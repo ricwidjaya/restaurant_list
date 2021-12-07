@@ -16,3 +16,11 @@ form {
 .radio {
   display: none;
 }
+
+.address {
+  display: flex;
+}
+
+#google-map {
+  margin-left: 15%;
+}
