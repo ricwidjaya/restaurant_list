@@ -43,5 +43,19 @@ router.get('/:id', (req, res) => {
     })
 })
 
+// Edit restaurant page
+router.get('/:id/edit', (req, res) => {
+  const id = req.params.id
+  Restaurant.findOne({ _id: id })
+    .lean()
+    .then((restaurant) => {
+      res.render('create', {
+        style: 'create.css',
+        script: 'create.js',
+        restaurant: restaurant
+      })
+    })
+})
+
 
 module.exports = router
