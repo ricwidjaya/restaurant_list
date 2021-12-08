@@ -45,6 +45,7 @@ router.get('/search', (req, res) => {
         script: 'index.js',
         restaurant: restaurants
       })
+      res.json(restaurants)
     })
 
 
