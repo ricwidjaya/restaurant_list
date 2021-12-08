@@ -20,12 +20,10 @@ a:visited {
   color: #4592af;
 }
 
-.delete > a:link {
+.delete {
   color: rgb(224, 77, 77);
-}
-
-.delete > a:visited {
-  color: rgb(224, 77, 77);
+  border: none;
+  background-color: #fff;
 }
 
 .restaurant-show-title {

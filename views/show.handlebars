@@ -9,12 +9,14 @@
             Edit
           </a>
         </p>
-        <p class="mb-1 delete">
-          <a href="{{ id }}/edit">
-            <i class="fas fa-trash-alt"></i>
-            Delete
-          </a>
-        </p>
+        <form action="{{ id }}?_method=DELETE" method="POST">
+          <p class="mb-1">
+            <button type="submit" class="delete">
+              <i class="fas fa-trash-alt"></i>
+              Delete
+            </button>
+          </p>
+        </form>
 
       </div>
       <p class="mb-1">

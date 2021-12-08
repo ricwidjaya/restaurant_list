@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <form action="/restaurants/create" method="POST">
+  <form action="/restaurants/{{ id }}?_method=PUT" method="POST">
     {{#if restaurant}}
     <div class="form-row">
       <div class="form-group col-md-4">
