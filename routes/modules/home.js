@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
     .then((restaurants) => {
       res.render('index', {
         style: 'index.css',
+        script: 'index.js',
         restaurant: restaurants
       })
     })
@@ -29,15 +30,34 @@ router.get('/', (req, res) => {
 router.get('/search', (req, res) => {
   const keyword = req.query.keyword.toLowerCase()
 
-  // Search restaurant's name or category
-  const filteredRestaurant = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword) ||
-    restaurant.category.toLowerCase().includes(keyword))
+  // Search keyword from DB with regex
+  Restaurant
+    .find({
+      $or: [
+        { name: new RegExp(keyword, 'i') },
+        { category: new RegExp(keyword, 'i') }
+      ]
+    })
+    .lean()
+    .then((restaurants) => {
+      res.render('index', {
+        style: 'index.css',
+        script: 'index.js',
+        restaurant: restaurants
+      })
+    })
 
-  res.render('index', {
-    style: 'index.css',
-    restaurant: filteredRestaurant,
-    keyword: keyword
-  })
+
+
+  // Search restaurant's name or category
+  // const filteredRestaurant = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword) ||
+  //   restaurant.category.toLowerCase().includes(keyword))
+
+  // res.render('index', {
+  //   style: 'index.css',
+  //   restaurant: filteredRestaurant,
+  //   keyword: keyword
+  // })
 })
 
 module.exports = router
