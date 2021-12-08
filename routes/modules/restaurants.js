@@ -38,7 +38,8 @@ router.get('/:id', (req, res) => {
     .then((restaurant) => {
       res.render('show', {
         style: 'show.css',
-        restaurant: restaurant
+        restaurant: restaurant,
+        id: id
       })
     })
 })
@@ -46,12 +47,12 @@ router.get('/:id', (req, res) => {
 // Edit restaurant page
 router.get('/:id/edit', (req, res) => {
   const id = req.params.id
-  Restaurant.findOne({ _id: id })
+  return Restaurant.findOne({ _id: id })
     .lean()
     .then((restaurant) => {
-      res.render('create', {
+      res.render('edit', {
         style: 'create.css',
-        script: 'create.js',
+        script: 'edit.js',
         restaurant: restaurant
       })
     })

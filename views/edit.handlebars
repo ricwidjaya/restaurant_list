@@ -1,18 +1,21 @@
 <div class="container mt-5">
   <form action="/restaurants/create" method="POST">
+    {{#if restaurant}}
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="name">餐廳名稱</label>
-        <input type="text" placeholder="餐廳中文名稱" name="name" class="form-control" id="name" required>
+        <input type="text" placeholder="餐廳中文名稱" name="name" class="form-control" id="name" value="{{ restaurant.name }}"
+          required>
       </div>
       <div class="form-group col-md-4">
         <label for="name-en">Name</label>
         <input type="text" placeholder="Restaurant English Name" name="name_en" class="form-control" id="name-en"
-          required>
+          value="{{ restaurant.name_en }}" required>
       </div>
       <div class="form-group col-md-4">
         <label for="phone">Phone</label>
-        <input type="tel" placeholder="0926802267" name="phone" class="form-control" id="phone" required>
+        <input type="tel" placeholder="0926802267" name="phone" class="form-control" id="phone" value="{{
+          restaurant.phone }}" required>
       </div>
     </div>
 
@@ -20,44 +23,40 @@
       <div class="form-group col-md-4">
         <label for="category">Category</label>
         <input type="text" placeholder="You decide the style" name="category" class="form-control" id="category"
-          required>
+          value="{{ restaurant.category }}" required>
       </div>
       <div class="form-group col-md-4">
         <label for="image">Image Link</label>
-        <input type="url" class="form-control" id="image" name="image" required>
+        <input type="url" class="form-control" id="image" name="image" value={{ restaurant.image }} required>
       </div>
       <div class="form-group col-md-4">
         <label for="rating">Rating</label>
-        <div class="rating">
-          <label for="star-1" class="far fa-star"></label>
-          <input class="radio" type="radio" value="1" name="rating" id="star-1" required>
-          <label for="star-2" class="far fa-star"></label>
-          <input class="radio" type="radio" value="2" name="rating" id="star-2">
-          <label for="star-3" class="far fa-star"></label>
-          <input class="radio" type="radio" value="3" name="rating" id="star-3">
-          <label for="star-4" class="far fa-star"></label>
-          <input class="radio" type="radio" value="4" name="rating" id="star-4">
-          <label for="star-5" class="far fa-star"></label>
-          <input class="radio" type="radio" value="5" name="rating" id="star-5">
-        </div>
+        <select class="form-control" name="rating" id="rating">
+          <option value="{{ restaurant.rating }}" selected>{{ restaurant.rating }}</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
       </div>
     </div>
 
     <div class="form-group">
       <label for="address">Address</label>
-      <input type="text" class="form-control" id="address" name="location"
-        placeholder="Input address and search on the map" required>
+      <input type="text" class="form-control" id="address" name="location" value="{{ restaurant.location }}"
+        placeholder=" Input address and search on the map" required>
     </div>
 
     <div class="form-group">
       <label for="description">Description</label>
       <textarea class="form-control" id="description" name="description" placeholder="What's about this restaurant!"
-        rows="5" required></textarea>
+        rows="5" required>{{ restaurant.description }}</textarea>
     </div>
-
+    {{/if}}
     <div class="row justify-content-end">
       <div class="col-2">
-        <button type="submit" class="btn add-btn">Add Restaurant</button>
+        <button type="submit" class="btn add-btn">Save Changes</button>
       </div>
     </div>
   </form>

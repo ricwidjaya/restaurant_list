@@ -4,6 +4,30 @@
   top: 0;
 }
 
+.options {
+  display: flex;
+  justify-content: end;
+  gap: 2rem;
+}
+
+a:link {
+  text-decoration: none;
+  color: #4592af;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #4592af;
+}
+
+.delete > a:link {
+  color: rgb(224, 77, 77);
+}
+
+.delete > a:visited {
+  color: rgb(224, 77, 77);
+}
+
 .restaurant-show-title {
   top: -100px;
 }

@@ -3,6 +3,7 @@ const stars = document.querySelectorAll('.fa-star')
 const address = document.querySelector('#address')
 const googleMap = document.querySelector('#google-map')
 
+
 stars.forEach(star => {
   star.addEventListener('click', (event) => {
     const value = event.target.nextElementSibling.value

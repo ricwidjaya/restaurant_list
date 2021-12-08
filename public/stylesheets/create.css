@@ -1,7 +1,12 @@
-
-
 .banner {
   height: 720px;
+}
+
+form::before {
+  content: "Restaurant Info";
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #4592af;
 }
 
 form {
@@ -17,10 +22,8 @@ form {
   display: none;
 }
 
-.address {
-  display: flex;
-}
-
-#google-map {
-  margin-left: 15%;
+.add-btn {
+  color: #fff;
+  background-color: #4592af;
+  border-color: #4592af;
 }
