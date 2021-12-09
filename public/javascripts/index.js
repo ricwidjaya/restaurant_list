@@ -15,7 +15,6 @@ search.addEventListener('keyup', (event) => {
     .then(function (response) {
       // handle success
       let data = response.data
-      console.log(data)
       renderFilteredCards(data)
     })
     .catch(function (error) {

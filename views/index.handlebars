@@ -6,9 +6,8 @@
       <form action="/search">
         <h4 class="mb-2">Gourmet Search</h4>
         <div class="input-group">
-          <input type="text" name="keyword" class="form-control" 
-          id="search" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
-            value="{{ keyword }}" aria-describedby="search-button">
+          <input type="text" name="keyword" class="form-control" id="search" placeholder="輸入餐廳、分類"
+            aria-label="Restaurant Name..." value="{{ keyword }}" aria-describedby="search-button">
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
@@ -36,12 +35,33 @@
               <i class="fas fa-utensils pr-2"></i> {{ this.category }}
             </div>
 
-            <span class="badge badge-pill badge-danger font-weight-normal">
-              {{ this.rating }}
-              <i class="fas fa-star fa-xs"></i>
-            </span>
+            <div class="options">
+              <span class="badge badge-pill badge-danger font-weight-normal">
+                {{ this.rating }}
+                <i class="fas fa-star fa-xs"></i>
+              </span>
+
+              <p class="mb-1">
+                <a href="restaurants/{{ this._id }}/edit">
+                  <i class="fas fa-edit" style="user-select: auto;"></i>
+                  Edit
+                </a>
+              </p>
+
+              <form action="restaurants/{{ this._id }}?_method=DELETE" method="POST">
+                <p class="mb-1">
+                  <button type="submit" class="delete">
+                    <i class="fas fa-trash-alt"></i>
+                    Delete
+                  </button>
+                </p>
+              </form>
+            </div>
+
+
 
           </div>
+
       </div>
       </a>
       {{/each}}

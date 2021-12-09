@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
     })
 })
 
-// Search feature
+// Live Search API
 router.get('/search', (req, res) => {
   const keyword = req.query.keyword.toLowerCase()
 
