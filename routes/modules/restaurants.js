@@ -1,7 +1,14 @@
 const express = require('express')
 const router = express.Router()
-
 const Restaurant = require('../../models/restaurant')
+
+// Restaurant create page
+router.get('/create', (req, res) => {
+  res.render('create', {
+    style: 'create.css',
+    script: 'create.js'
+  })
+})
 
 // View restaurant info
 router.get('/:id', (req, res) => {
@@ -14,32 +21,15 @@ router.get('/:id', (req, res) => {
         restaurant,
         id
       })
+    }).catch((error) => {
+      console.log(error)
     })
-})
-
-// Restaurant create page
-router.get('/create', (req, res) => {
-  res.render('create', {
-    style: 'create.css',
-    script: 'create.js'
-  })
 })
 
 // Create restaurant
 router.post('/', (req, res) => {
-  const { name, name_en, phone, category, image, rating, location, description } = req.body
-
-  Restaurant.create({
-    name,
-    name_en,
-    category,
-    image,
-    location,
-    phone,
-    rating,
-    description
-  })
-
+  const restaurant = req.body
+  Restaurant.create(restaurant)
   res.redirect('/')
 })
 
@@ -56,24 +46,16 @@ router.get('/:id/edit', (req, res) => {
         id
       })
     })
+    .catch((error) => {
+      console.log(error)
+    })
 })
 
 // Update restaurant
 router.put('/:id', (req, res) => {
   const id = req.params.id
-  const { name, name_en, phone, category, image, rating, location, description } = req.body
-  return Restaurant.findById(id)
-    .then((restaurant) => {
-      restaurant.name = name
-      restaurant.name_en = name_en
-      restaurant.category = category
-      restaurant.image = image
-      restaurant.location = location
-      restaurant.phone = phone
-      restaurant.rating = rating
-      restaurant.description = description
-      restaurant.save()
-    })
+  const restaurant = req.body
+  return Restaurant.findByIdAndUpdate(id, restaurant)
     .then(res.redirect(`/restaurants/${id}`))
     .catch((error) => {
       console.log(error)

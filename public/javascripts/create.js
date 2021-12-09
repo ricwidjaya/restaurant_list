@@ -1,8 +1,6 @@
 const inputs = document.querySelectorAll('input')
 const stars = document.querySelectorAll('.fa-star')
-const address = document.querySelector('#address')
-const googleMap = document.querySelector('#google-map')
-
+const form = document.querySelector('form')
 
 stars.forEach(star => {
   star.addEventListener('click', (event) => {
@@ -11,8 +9,6 @@ stars.forEach(star => {
     renderStars(value)
   })
 })
-
-googleMap.src = `https://www.google.com/maps/embed/v1/search?q=taiwan&key=AIzaSyBkYPEMIAjDcR08X2DgGoB-jUViPa4_L2s`
 
 
 // Prevent submit by pressing enter in inputs
@@ -24,14 +20,15 @@ inputs.forEach(input => {
   })
 })
 
-address.addEventListener('keyup', (event) => {
-  const query = event.target.value
-  if (!query) {
-    query = 'Taiwan'
-  } else {
-    googleMap.src = `https://www.google.com/maps/embed/v1/search?q=${query}&key=AIzaSyBkYPEMIAjDcR08X2DgGoB-jUViPa4_L2s`
+
+// Form validation
+form.addEventListener('submit', (event) => {
+  if (!form.checkValidity()) {
+    event.preventDefault()
   }
+  form.classList.add('was-validated')
 })
+
 
 
 // Functions

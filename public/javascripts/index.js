@@ -12,14 +12,12 @@ search.addEventListener('keyup', (event) => {
   const keyword = event.target.value
   const query = `/search?keyword=${keyword}`
   axios.get(query)
-    .then(function (response) {
-      // handle success
+    .then((response) => {
       let data = response.data
       renderFilteredCards(data)
     })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
+    .catch((error) => {
+      console.log(error)
     })
 })
 
