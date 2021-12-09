@@ -40,25 +40,8 @@ router.get('/search', (req, res) => {
     })
     .lean()
     .then((restaurants) => {
-      res.render('index', {
-        style: 'index.css',
-        script: 'index.js',
-        restaurant: restaurants
-      })
       res.json(restaurants)
     })
-
-
-
-  // Search restaurant's name or category
-  // const filteredRestaurant = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword) ||
-  //   restaurant.category.toLowerCase().includes(keyword))
-
-  // res.render('index', {
-  //   style: 'index.css',
-  //   restaurant: filteredRestaurant,
-  //   keyword: keyword
-  // })
 })
 
 module.exports = router
