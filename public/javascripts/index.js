@@ -1,6 +1,7 @@
 const search = document.querySelector('#search')
 const cards = document.querySelector('.card-columns')
 
+
 // Prevent user submit search form
 search.addEventListener('keydown', (event) => {
   if (event.key === "Enter") {
@@ -21,6 +22,14 @@ search.addEventListener('keyup', (event) => {
     })
 })
 
+// Handle img error
+const images = document.querySelectorAll('img')
+images.forEach((img) => {
+  console.log(img)
+  img.addEventListener('error', function replaceErrorImg() {
+    img.src = 'https://oldtownlaquinta.com/2019/wp-content/uploads/2019/10/dining.jpg'
+  })
+})
 
 
 function renderFilteredCards(data) {
