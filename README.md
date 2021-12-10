@@ -1,7 +1,6 @@
 # Foodies
 ## _Visit the restaurant we love_
 
-![Uploading Screen Shot 2021-12-10 at 17.41.24.png…]()
 
 
 Foodies is a web app built with Express.js and Node.js that allows you to share and operate restaurants information.
@@ -41,9 +40,10 @@ npm install
 npm install -g nodemon
 ```
 
-5. Run the data seeder using below npm script, if successful, `MongoDB Connected` will show in the terminal.
+5. Run the data seeder to create initial data by using below npm script, if successful, `MongoDB Connected` will show in the terminal.
 ```
-npm run dev
+npm run seed
+
 ```
 
 6. Run the server on localhost using below npm script, if successful, `Server Started` will show in the terminal.
