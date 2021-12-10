@@ -1,7 +1,7 @@
 # Foodies
 ## _Visit the restaurant we love_
 
-<img width="1440" alt="Screen Shot 2021-11-11 at 16 36 08" src="https://user-images.githubusercontent.com/43133690/141269712-2cb14288-3814-4e0b-a3d7-332bc3aa46cf.png">
+![Uploading Screen Shot 2021-12-10 at 17.41.24.png…]()
 
 
 Foodies is a web app built with Express.js and Node.js that allows you to share and operate restaurants information.
