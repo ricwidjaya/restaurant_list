@@ -8,6 +8,7 @@ search.addEventListener('keydown', (event) => {
   }
 })
 
+// Listen to query for live search API
 search.addEventListener('keyup', (event) => {
   const keyword = event.target.value
   const query = `/search?keyword=${keyword}`
@@ -25,6 +26,7 @@ search.addEventListener('keyup', (event) => {
 const forms = document.querySelectorAll('form')
 forms.forEach((form) => {
   form.addEventListener('submit', (event) => {
+    // Prevent form submitting when click
     event.stopPropagation()
     event.preventDefault()
     Swal.fire({
@@ -43,6 +45,7 @@ forms.forEach((form) => {
           icon: 'success',
           showConfirmButton: false
         })
+        // Show success icon for 2 sec and submit the form to API
         setTimeout(() => {
           form.submit()
         }, 2000)

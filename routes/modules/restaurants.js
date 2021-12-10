@@ -18,6 +18,7 @@ router.get('/:id', (req, res) => {
     .then((restaurant) => {
       res.render('show', {
         style: 'show.css',
+        script: 'show.js',
         restaurant,
         id
       })
