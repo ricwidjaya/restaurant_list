@@ -15,7 +15,11 @@ search.addEventListener('keyup', (event) => {
   axios.get(query)
     .then((response) => {
       let data = response.data
-      renderFilteredCards(data)
+      if (data.length) {
+        renderFilteredCards(data)
+      } else {
+        noSearchResultRender()
+      }
     })
     .catch((error) => {
       console.log(error)
@@ -89,4 +93,11 @@ function renderFilteredCards(data) {
        `
   }))
   cards.innerHTML = rawHTML
+}
+
+function noSearchResultRender() {
+  // Photo credit by by Kapil Gopinathan
+  cards.innerHTML = `
+  <img class="no-result" src="https://cdn.dribbble.com/users/760295/screenshots/4433975/media/682a69bc4378238a53b9fdcc33d1759c.png">
+  `
 }
