@@ -4,19 +4,20 @@
 <img width="1440" alt="Screen Shot 2021-11-11 at 16 36 08" src="https://user-images.githubusercontent.com/43133690/141269712-2cb14288-3814-4e0b-a3d7-332bc3aa46cf.png">
 
 
-Foodies is a web app built with Express.js and Node.js that allows you to view restaurants we recommend.
+Foodies is a web app built with Express.js and Node.js that allows you to share and operate restaurants information.
 
 
 ## Features
 
--  Users can view the restaurant we recommend.
--  Users can search for specific restaurant by name or category.
--  Users can click on specific restaurant and view its detailed description.
+-  User can view, create, edit, delete restaurant list.
+-  Live Search - Users can search for specific restaurant by name or category without browser refresh.
+-  User can can view and create map through Google Map API only with address.
 
 ## Getting Start
 
 ### Environment Setup
 1. [Node.js](https://nodejs.org/en/) v16 LTS
+2. [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/) v4.2.17
 
 ### Installing
 
@@ -40,7 +41,12 @@ npm install
 npm install -g nodemon
 ```
 
-5. Run the server using below npm script, if successful, `Server Started` will show in the terminal.
+5. Run the data seeder using below npm script, if successful, `MongoDB Connected` will show in the terminal.
+```
+npm run dev
+```
+
+6. Run the server on localhost using below npm script, if successful, `Server Started` will show in the terminal.
 ```
 npm run dev
 ```
