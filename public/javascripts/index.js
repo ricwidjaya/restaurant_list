@@ -1,7 +1,6 @@
 const search = document.querySelector('#search')
 const cards = document.querySelector('.card-columns')
 
-
 // Prevent user submit search form
 search.addEventListener('keydown', (event) => {
   if (event.key === "Enter") {
@@ -20,6 +19,36 @@ search.addEventListener('keyup', (event) => {
     .catch((error) => {
       console.log(error)
     })
+})
+
+// Confirm delete
+const forms = document.querySelectorAll('form')
+forms.forEach((form) => {
+  form.addEventListener('submit', (event) => {
+    event.stopPropagation()
+    event.preventDefault()
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Deleted!',
+          text: "You'll be redirecting to home page.",
+          icon: 'success',
+          showConfirmButton: false
+        })
+        setTimeout(() => {
+          form.submit()
+        }, 2000)
+      }
+    })
+  })
 })
 
 // Handle img error

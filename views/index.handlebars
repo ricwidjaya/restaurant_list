@@ -48,7 +48,7 @@
                 </a>
               </p>
 
-              <form action="restaurants/{{ this._id }}?_method=DELETE" method="POST">
+              <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST">
                 <p class="mb-1">
                   <button type="submit" class="delete">
                     <i class="fas fa-trash-alt"></i>
@@ -57,11 +57,7 @@
                 </p>
               </form>
             </div>
-
-
-
           </div>
-
       </div>
       </a>
       {{/each}}
