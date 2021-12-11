@@ -10,11 +10,22 @@
         <div class="search-bar-inner search-options">
           <form action="/search" class="search-form">
             <div class="input-group">
-              <input type="text" name="keyword" class="form-control" id="search" placeholder="輸入餐廳、分類"
-                aria-label="Restaurant Name..." value="{{ keyword }}" aria-describedby="search-button">
+              <input
+                type="text"
+                name="keyword"
+                class="form-control"
+                id="search"
+                placeholder="輸入餐廳、分類"
+                aria-label="Restaurant Name..."
+                value="{{keyword}}"
+                aria-describedby="search-button"
+              />
               <div class="input-group-append">
-                <button class="btn btn-major search-btn" type="button" id="search-button"><i
-                    class="fas fa-search"></i></button>
+                <button
+                  class="btn btn-major search-btn"
+                  type="button"
+                  id="search-button"
+                ><i class="fas fa-search"></i></button>
               </div>
             </div>
           </form>
@@ -22,71 +33,91 @@
       </div>
       <div class="col-3">
         <form action="/" class="dropdown sort-form">
-          <button class="btn sort-btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-            aria-expanded="false">
+          <button
+            class="btn sort-btn dropdown-toggle"
+            type="button"
+            id="dropdownMenu2"
+            data-toggle="dropdown"
+            aria-expanded="false"
+          >
             <i class="fas fa-sort sort"></i>Sort
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <button name="sort" class="dropdown-item" type="submit" value="a-z"><i
-                class="fas fa-sort-alpha-down sort"></i>A-Z</button>
-            <button name="sort" class="dropdown-item" type="button"><i
-                class="fas fa-sort-alpha-down-alt sort"></i>Z-A</button>
-            <button name="sort" class="dropdown-item" type="button"><i
-                class="fas fa-sort-amount-down sort"></i>Category</button>
-            <button name="sort" class="dropdown-item" type="button"><i class="fas fa-map-pin sort"></i>Location</button>
+            <button name="sort" class="dropdown-item" type="submit" value="0"><i
+                class="fas fa-sort-alpha-down sort"
+              ></i>A-Z</button>
+            <button name="sort" class="dropdown-item" type="submit" value="1"><i
+                class="fas fa-sort-alpha-down-alt sort"
+              ></i>Z-A</button>
+            <button
+              name="sort"
+              class="dropdown-item"
+              type="submit"
+              value="category"
+            ><i class="fas fa-sort-amount-down sort"></i>Category</button>
           </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
-
 
 <!-- restaurant list -->
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
+        {{#each restaurant}}
+          {{! Print restaurants here }}
+          <a href="/restaurants/{{this._id}}" class="text-secondary">
+            <div class="card mb-3">
+              <img
+                class="card-img-top"
+                src="{{this.image}}"
+                alt="{{this.name}}"
+              />
+              <div class="card-body p-3">
+                <h6 class="card-title mb-1">{{this.name}}</h6>
 
-        {{!-- Print restaurants here --}}
-        {{# each restaurant}}
-        <a href="/restaurants/{{ this._id }}" class="text-secondary">
-          <div class="card mb-3">
-            <img class="card-img-top" src="{{ this.image }}" alt="{{ this.name }}"">
-            <div class=" card-body p-3">
-            <h6 class="card-title mb-1">{{ this.name }}</h6>
+                <div class="this-category mb-1">
+                  <i class="fas fa-utensils pr-2"></i>
+                  {{this.category}}
+                </div>
 
-            <div class="this-category mb-1">
-              <i class="fas fa-utensils pr-2"></i> {{ this.category }}
+                <div class="options">
+                  <span
+                    class="badge badge-pill badge-danger font-weight-normal"
+                  >
+                    {{this.rating}}
+                    <i class="fas fa-star fa-xs"></i>
+                  </span>
+
+                  <p class="mb-1">
+                    <a href="restaurants/{{this._id}}/edit">
+                      <i class="fas fa-edit" style="user-select: auto;"></i>
+                      Edit
+                    </a>
+                  </p>
+
+                  <form
+                    class="delete-form"
+                    action="/restaurants/{{this._id}}?_method=DELETE"
+                    method="POST"
+                  >
+                    <p class="mb-1">
+                      <button type="submit" class="delete">
+                        <i class="fas fa-trash-alt"></i>
+                        Delete
+                      </button>
+                    </p>
+                  </form>
+                </div>
+              </div>
             </div>
-
-            <div class="options">
-              <span class="badge badge-pill badge-danger font-weight-normal">
-                {{ this.rating }}
-                <i class="fas fa-star fa-xs"></i>
-              </span>
-
-              <p class="mb-1">
-                <a href="restaurants/{{ this._id }}/edit">
-                  <i class="fas fa-edit" style="user-select: auto;"></i>
-                  Edit
-                </a>
-              </p>
-
-              <form class="delete-form" action="/restaurants/{{ this._id }}?_method=DELETE" method="POST">
-                <p class="mb-1">
-                  <button type="submit" class="delete">
-                    <i class="fas fa-trash-alt"></i>
-                    Delete
-                  </button>
-                </p>
-              </form>
-            </div>
-          </div>
+          </a>
+        {{/each}}
       </div>
-      </a>
-      {{/each}}
-
     </div>
+
   </div>
-</div>
 </div>
