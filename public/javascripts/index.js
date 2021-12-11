@@ -17,6 +17,7 @@ search.addEventListener('keyup', (event) => {
       let data = response.data
       if (data.length) {
         renderFilteredCards(data)
+        confirmDeleteListener()
       } else {
         noSearchResultRender()
       }
@@ -27,36 +28,7 @@ search.addEventListener('keyup', (event) => {
 })
 
 // Confirm delete
-const forms = document.querySelectorAll('form')
-forms.forEach((form) => {
-  form.addEventListener('submit', (event) => {
-    // Prevent form submitting when click
-    event.stopPropagation()
-    event.preventDefault()
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: 'Deleted!',
-          text: "You'll be redirecting to home page.",
-          icon: 'success',
-          showConfirmButton: false
-        })
-        // Show success icon for 2 sec and submit the form to API
-        setTimeout(() => {
-          form.submit()
-        }, 2000)
-      }
-    })
-  })
-})
+confirmDeleteListener()
 
 // Handle img error
 const images = document.querySelectorAll('img')
@@ -66,6 +38,38 @@ images.forEach((img) => {
   })
 })
 
+function confirmDeleteListener() {
+  const forms = document.querySelectorAll('.delete-form')
+  forms.forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      // Prevent form submitting when click
+      event.stopPropagation()
+      event.preventDefault()
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: 'Deleted!',
+            text: "You'll be redirecting to home page.",
+            icon: 'success',
+            showConfirmButton: false
+          })
+          // Show success icon for 2 sec and submit the form to API
+          setTimeout(() => {
+            form.submit()
+          }, 2000)
+        }
+      })
+    })
+  })
+}
 
 function renderFilteredCards(data) {
   rawHTML = ''
@@ -82,11 +86,27 @@ function renderFilteredCards(data) {
               <i class="fas fa-utensils pr-2"></i> ${restaurant.category}
             </div>
 
-            <span class="badge badge-pill badge-danger font-weight-normal">
-              ${restaurant.rating}
-              <i class="fas fa-star fa-xs"></i>
-            </span>
+            <div class="options">
+              <span class="badge badge-pill badge-danger font-weight-normal">
+                ${restaurant.rating}
+                <i class="fas fa-star fa-xs"></i>
+              </span>
 
+              <p class="mb-1">
+                <a href="restaurants/${restaurant._id}/edit">
+                  <i class="fas fa-edit" style="user-select: auto;"></i>
+                  Edit
+                </a>
+              </p>
+              <form class="delete-form" action="/restaurants/${restaurant._id}?_method=DELETE" method="POST">
+                <p class="mb-1">
+                  <button type="submit" class="delete">
+                    <i class="fas fa-trash-alt"></i>
+                    Delete
+                  </button>
+                </p>
+              </form>
+            </div>
           </div>
       </div>
       </a>

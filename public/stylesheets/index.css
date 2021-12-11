@@ -52,13 +52,35 @@ header {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-.search-bar .search-bar-inner h4 {
+h4 {
+  margin-left: 1rem;
   color: #9b4b4b;
+}
+
+.search-btn {
+  border-color: transparent;
 }
 
 .form-control::placeholder {
   color: #aaaaaa;
   font-size: 0.8rem;
+}
+
+.sort-btn {
+  color: #fff;
+  background-color: #9b4b4b;
+  border-color: transparent;
+  margin-left: 1rem;
+}
+
+.sort-btn > i {
+  color: #fff;
+}
+
+/* icon color */
+.sort {
+  color: #9b4b4b;
+  margin-right: 1rem;
 }
 
 .btn-major {
