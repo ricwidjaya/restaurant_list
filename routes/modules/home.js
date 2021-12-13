@@ -4,53 +4,14 @@ const router = express.Router()
 const Restaurant = require("../../models/restaurant")
 
 router.get("/", (req, res) => {
-  const sortAToZ = req.query.sort
-  if (sortAToZ === "0") {
-    return Restaurant.find()
-      .lean()
-      .collation({ locale: "en_US", strength: 1 })
-      .sort({ name: 1 })
-      .then((restaurants) => {
-        res.render("index", {
-          style: "index.css",
-          script: "index.js",
-          restaurant: restaurants
-        })
-      })
-  }
-  if (sortAToZ === "1") {
-    return Restaurant.find()
-      .lean()
-      .collation({ locale: "en_US", strength: 1 })
-      .sort({ name: -1 })
-      .then((restaurants) => {
-        res.render("index", {
-          style: "index.css",
-          script: "index.js",
-          restaurant: restaurants
-        })
-      })
-  }
-
-  // By category
-  if (sortAToZ === "category") {
-    return Restaurant.find()
-      .lean()
-      .collation({ locale: "zh_Hant", strength: 1 })
-      .sort({ category: 1 })
-      .then((restaurants) => {
-        res.render("index", {
-          style: "index.css",
-          script: "index.js",
-          restaurant: restaurants
-        })
-      })
-  }
+  const keyword = req.query.keyword
+  const sortMethod = req.query.sort
+  let { where, sortOpt } = queryParams(keyword, sortMethod)
 
   // Regular index page
-  Restaurant.find()
+  Restaurant.find(where)
     .lean()
-    .sort({ _id: "desc" }) // new restaurant shows first
+    .sort(sortOpt)
     .then((restaurants) => {
       // Change MongoDB ObjectId into string
       restaurants.forEach((restaurant) => {
@@ -73,18 +34,40 @@ router.get("/", (req, res) => {
 // Live Search API
 router.get("/search", (req, res) => {
   const keyword = req.query.keyword.toLowerCase()
-
-  // Search keyword from DB with regex
-  Restaurant.find({
-    $or: [
-      { name: new RegExp(keyword, "i") },
-      { category: new RegExp(keyword, "i") }
-    ]
-  })
+  let { where, sortOpt } = queryParams(keyword)
+  Restaurant.find(where)
     .lean()
+    .sort(sortOpt)
     .then((restaurants) => {
       res.json(restaurants)
+    })
+    .catch((error) => {
+      console.log(error)
     })
 })
 
 module.exports = router
+
+function queryParams(keyword, sortMethod) {
+  // Define sort methods
+  const sort = {
+    0: { name: 1 },
+    1: { name: -1 },
+    category: { category: 1 }
+  }
+
+  // If sortMethod is not defined, default sort will be "name"
+  let sortOpt = sort[sortMethod] || { _id: "desc" }
+
+  // Search keyword from DB with regex
+  let where = keyword
+    ? {
+        $or: [
+          { name: new RegExp(keyword, "i") },
+          { category: new RegExp(keyword, "i") }
+        ]
+      }
+    : {}
+
+  return { where, sortOpt }
+}
