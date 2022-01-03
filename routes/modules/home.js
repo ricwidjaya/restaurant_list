@@ -3,6 +3,18 @@ const router = express.Router()
 
 const Restaurant = require("../../models/restaurant")
 
+// User sign in
+router.get("/signin", (req, res) => {
+  return res.render("signin", {
+    style: "signin.css"
+  })
+})
+
+// User sign up
+router.get("/signup", (req, res) => {
+  return res.render("signup")
+})
+
 router.get("/", (req, res) => {
   const keyword = req.query.keyword
   const sortMethod = req.query.sort

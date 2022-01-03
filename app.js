@@ -16,8 +16,8 @@ app.use(methodOverride("_method"))
 
 // Set template engine to "Handlebars"
 const exphbs = require("express-handlebars")
-app.engine("handlebars", exphbs())
-app.set("view engine", "handlebars")
+app.engine("hbs", exphbs({ extname: ".hbs" }))
+app.set("view engine", "hbs")
 
 // Set body parser
 app.use(express.urlencoded({ extended: true }))

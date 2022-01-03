@@ -1,9 +1,9 @@
-<h1 class="mb-1 restaurant-show-title">{{ restaurant.name }}</h1>
+<h1 class="mb-1 restaurant-show-title">{{restaurant.name}}</h1>
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
       <div class="options">
-        {{!-- Home button --}}
+        {{! Home button }}
         <p class="mb-1">
           <a href="/">
             <i class="fas fa-home" style="user-select: auto;"></i>
@@ -11,12 +11,12 @@
           </a>
         </p>
         <p class="mb-1">
-          <a href="{{ id }}/edit">
+          <a href="{{id}}/edit">
             <i class="fas fa-edit" style="user-select: auto;"></i>
             Edit
           </a>
         </p>
-        <form action="{{ id }}?_method=DELETE" method="POST">
+        <form action="{{id}}?_method=DELETE" method="POST">
           <p class="mb-1">
             <button type="submit" class="delete">
               <i class="fas fa-trash-alt"></i>
@@ -31,7 +31,7 @@
           <i class="fas fa-utensils pr-2"></i>
           類別：
         </span>
-        {{ restaurant.category }}
+        {{restaurant.category}}
       </p>
 
       <p class="mb-1">
@@ -39,7 +39,7 @@
           <i class="fas fa-map-marker-alt pr-2"></i>
           地址：
         </span>
-        {{ restaurant.location }}
+        {{restaurant.location}}
       </p>
 
       <p class="mb-1">
@@ -47,17 +47,27 @@
           <i class="fas fa-mobile-alt pr-2"></i>
           電話：
         </span>
-        {{ restaurant.phone }}
+        {{restaurant.phone}}
       </p>
 
       <p class="mb-5">
-        {{ restaurant.description }}
+        {{restaurant.description}}
       </p>
 
       <div class="boxes">
-        <img class="rounded mx-auto d-block mb-4 w-100" src="{{ restaurant.image }}" style="max-width: 600px;">
-        <iframe id="google-map" width="600" height="450" style="border:0" loading="lazy"
-          src="https://www.google.com/maps/embed/v1/search?q=${{ restaurant.location }}&key=AIzaSyBkYPEMIAjDcR08X2DgGoB-jUViPa4_L2s"></iframe>
+        <img
+          class="rounded mx-auto d-block mb-4 w-100"
+          src="{{restaurant.image}}"
+          style="max-width: 600px;"
+        />
+        <iframe
+          id="google-map"
+          width="600"
+          height="450"
+          style="border:0"
+          loading="lazy"
+          src="https://www.google.com/maps/embed/v1/search?q=${{restaurant.location}}&key={{GOOGLE_MAP_API_KEY}}"
+        ></iframe>
       </div>
     </div>
   </div>

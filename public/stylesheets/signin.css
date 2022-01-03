@@ -1,0 +1,10 @@
+.signin {
+  margin-top: -300px;
+}
+
+.card {
+  /* Background style */
+  background-color: rgba(255, 254, 254);
+  padding: 2rem 3rem;
+  border-radius: 25px;
+}
