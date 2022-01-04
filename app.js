@@ -12,6 +12,7 @@ require("./config/mongoose")
 const routes = require("./routes")
 const session = require("express-session")
 const passport = require("./config/passport")
+const flash = require("connect-flash")
 
 // Method Override
 app.use(methodOverride("_method"))
@@ -37,10 +38,13 @@ app.use(
 )
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(flash())
 
 // Locals
 app.use((req, res, next) => {
   res.locals.user = req.user
+  res.locals.success_messages = req.flash("success_messages")
+  res.locals.error_messages = req.flash("error_messages")
   next()
 })
 

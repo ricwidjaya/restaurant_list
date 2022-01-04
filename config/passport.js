@@ -13,11 +13,20 @@ passport.use(
       // User authentication
       User.findOne({ email }).then((user) => {
         // User not found
-        if (!user) return done(null, false, { message: "User not found" })
+        if (!user)
+          return done(
+            null,
+            false,
+            req.flash("error_messages", "User not found!")
+          )
 
         // Password validation failed
         if (!bcrypt.compareSync(password, user.password))
-          return done(null, false, { message: "Invalid Password!" })
+          return done(
+            null,
+            false,
+            req.flash("error_messages", "Invalid Password!")
+          )
 
         // Pass Authentication
         return done(null, user)
