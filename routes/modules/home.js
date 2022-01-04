@@ -6,12 +6,7 @@ const passport = require("passport")
 const Restaurant = require("../../models/restaurant")
 const User = require("../../models/user")
 
-const authenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next()
-  }
-  return res.redirect("/login")
-}
+const { authenticated } = require("../../controllers/auth")
 
 // User sign in
 router.get("/login", (req, res) => {
@@ -61,6 +56,7 @@ router.post("/signup", (req, res) => {
 
 router.get("/logout", (req, res) => {
   req.logout()
+  console.log(req.user)
   return res.redirect("/login")
 })
 

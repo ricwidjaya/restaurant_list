@@ -1,6 +1,6 @@
 const Restaurant = require("../models/restaurant")
 
-const restaurantController = {
+module.exports = {
   // Restaurant create page
   create: (req, res) => {
     return res.render("create", {
@@ -74,4 +74,3 @@ const restaurantController = {
       })
   }
 }
-module.exports = restaurantController
