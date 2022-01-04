@@ -12,3 +12,12 @@
 .btn {
   border-color: white;
 }
+
+.btn-fb {
+  background-color: #1877f2;
+  color: white;
+}
+
+.btn-fb:hover {
+  background-color: #1877f2;
+}
