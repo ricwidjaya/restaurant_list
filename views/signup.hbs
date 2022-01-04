@@ -1,0 +1,49 @@
+<div class="sign-form">
+
+  <div class="card m-auto form" style="max-width: 30rem;">
+    <h1>Sign Up</h1>
+    <div class="card-body">
+      <form action="/signup" method="POST">
+      <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" class="form-control" id="name" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            aria-describedby="email"
+          />
+          <small id="email" class="form-text text-muted">We'll never share your
+            email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            id="password"
+          />
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            class="form-control"
+            id="confirmPassword"
+          />
+        </div>
+        </div>
+        <button type="submit" class="btn btn-major btn-block">Submit</button>
+        <br>
+        <small>Already have an account? Here to
+          <a href="/login">Log In</a></small>
+      </form>
+    </div>
+  </div>
+</div>

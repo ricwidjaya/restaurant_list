@@ -1,21 +1,70 @@
 const express = require("express")
 const router = express.Router()
+const bcrypt = require("bcryptjs")
+const passport = require("passport")
 
 const Restaurant = require("../../models/restaurant")
+const User = require("../../models/user")
+
+const authenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next()
+  }
+  return res.redirect("/login")
+}
 
 // User sign in
-router.get("/signin", (req, res) => {
-  return res.render("signin", {
-    style: "signin.css"
+router.get("/login", (req, res) => {
+  if (req.user) return res.redirect("/")
+  return res.render("login", {
+    style: "sign.css"
   })
 })
 
+// User login
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login"
+  })
+)
+
 // User sign up
 router.get("/signup", (req, res) => {
-  return res.render("signup")
+  return res.render("signup", {
+    style: "sign.css"
+  })
 })
 
-router.get("/", (req, res) => {
+// Create user
+router.post("/signup", (req, res) => {
+  const { email, name, password, confirmPassword } = req.body
+  // Check user uniqueness
+  User.findOne({ email }).then((user) => {
+    if (user) {
+      console.log("User already exist!")
+      return res.redirect("/login")
+    } else {
+      if (password !== confirmPassword) return res.redirect("back")
+
+      User.create({
+        email,
+        name,
+        password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+      }).then(() => {
+        return res.redirect("/login")
+      })
+    }
+  })
+})
+
+router.get("/logout", (req, res) => {
+  req.logout()
+  return res.redirect("/login")
+})
+
+router.get("/", authenticated, (req, res) => {
   const keyword = req.query.keyword
   const sortMethod = req.query.sort
   let { where, sortOpt } = queryParams(keyword, sortMethod)
@@ -44,7 +93,7 @@ router.get("/", (req, res) => {
 })
 
 // Live Search API
-router.get("/search", (req, res) => {
+router.get("/search", authenticated, (req, res) => {
   const keyword = req.query.keyword.toLowerCase()
   let { where, sortOpt } = queryParams(keyword)
   Restaurant.find(where)
