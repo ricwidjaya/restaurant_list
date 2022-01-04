@@ -1,7 +1,6 @@
 const express = require("express")
 const router = express.Router()
 
-const { authenticated } = require("../../controllers/auth")
 const restaurantController = require("../../controllers/restaurantController")
 
 // Restaurant create page
