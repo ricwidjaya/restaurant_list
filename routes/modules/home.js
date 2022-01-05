@@ -22,6 +22,22 @@ router.get(
   })
 )
 
+// Login with Google
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/login",
+    successRedirect: "/"
+  })
+)
+
+router.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["email", "profile"]
+  })
+)
+
 // User sign in
 router.get("/login", userController.loginPage)
 

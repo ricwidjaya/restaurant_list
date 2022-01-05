@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs")
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 const FacebookStrategy = require("passport-facebook").Strategy
+const GoogleStrategy = require("passport-google-oauth20").Strategy
 const User = require("../models/user")
 
 // Local strategy
@@ -66,6 +67,37 @@ passport.use(
           .catch((err) => {
             done(err, false)
           })
+      })
+    }
+  )
+)
+
+// Google Strategy
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: process.env.GOOGLE_CALLBACK_URL
+    },
+    (accessToken, refreshToken, profile, done) => {
+      const { email, name } = profile._json
+      console.log(email, name)
+      User.findOne({ email }).then((user) => {
+        // Email has registered
+        if (user) return done(null, user)
+
+        // New User
+        const randomPassword = Math.random().toString(36).slice(-8)
+        User.create({
+          email,
+          name,
+          password: bcrypt.hashSync(randomPassword, bcrypt.genSaltSync(10))
+        })
+          .then((user) => {
+            return done(null, user)
+          })
+          .catch((err) => console.log(err))
       })
     }
   )
