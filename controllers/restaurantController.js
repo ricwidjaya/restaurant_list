@@ -12,7 +12,8 @@ module.exports = {
   // View restaurant info
   getRestaurant: (req, res) => {
     const id = req.params.id
-    return Restaurant.findById(id)
+    const userId = req.user.id
+    return Restaurant.findOne({ id, userId })
       .lean()
       .then((restaurant) => {
         res.render("show", {
@@ -78,7 +79,7 @@ module.exports = {
   getRestaurants: (req, res) => {
     const keyword = req.query.keyword
     const sortMethod = req.query.sort
-    let { where, sortOpt } = queryParams(keyword, sortMethod)
+    let { where, sortOpt } = queryParams(req, keyword, sortMethod)
 
     // Regular index page
     Restaurant.find(where)
@@ -106,7 +107,7 @@ module.exports = {
   // Live Search API
   search: (req, res) => {
     const keyword = req.query.keyword.toLowerCase()
-    let { where, sortOpt } = queryParams(keyword)
+    let { where, sortOpt } = queryParams(req, keyword)
     Restaurant.find(where)
       .lean()
       .sort(sortOpt)
@@ -119,7 +120,7 @@ module.exports = {
   }
 }
 
-function queryParams(keyword, sortMethod) {
+function queryParams(req, keyword, sortMethod) {
   // Define sort methods
   const sort = {
     0: { name: 1 },
@@ -136,9 +137,10 @@ function queryParams(keyword, sortMethod) {
         $or: [
           { name: new RegExp(keyword, "i") },
           { category: new RegExp(keyword, "i") }
-        ]
+        ],
+        userId: req.user._id
       }
-    : {}
+    : { userId: req.user._id }
 
   return { where, sortOpt }
 }
