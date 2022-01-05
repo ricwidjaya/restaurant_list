@@ -1,17 +1,17 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const Restaurant = new Schema({
   name: {
     type: String,
-    require: true,
+    require: true
   },
   name_en: {
     type: String
   },
   category: {
     type: String,
-    required: true,
+    required: true
   },
   image: {
     type: String
@@ -29,7 +29,13 @@ const Restaurant = new Schema({
   description: {
     type: String,
     required: true
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    require: true,
+    index: true
   }
 })
 
-module.exports = mongoose.model('Restaurant', Restaurant)
+module.exports = mongoose.model("Restaurant", Restaurant)
