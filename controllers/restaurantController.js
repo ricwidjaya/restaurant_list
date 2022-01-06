@@ -12,11 +12,14 @@ module.exports = {
   // View restaurant info
   getRestaurant: (req, res) => {
     const id = req.params.id
-    const userId = req.user.id
-    return Restaurant.findOne({ id, userId })
+    return Restaurant.findById(id)
       .lean()
       .then((restaurant) => {
-        res.render("show", {
+        // Only can view owned restaurant
+        if (restaurant.userId.toString() !== req.user._id.toString())
+          return res.redirect("/")
+
+        return res.render("show", {
           style: "show.css",
           script: "show.js",
           restaurant,
@@ -32,6 +35,7 @@ module.exports = {
   // Create restaurant
   postRestaurant: (req, res) => {
     const restaurant = req.body
+    restaurant.userId = req.user._id
     Restaurant.create(restaurant)
     return res.redirect("/")
   },
@@ -42,6 +46,10 @@ module.exports = {
     return Restaurant.findById(id)
       .lean()
       .then((restaurant) => {
+        // Only can edit owned restaurant
+        if (restaurant.userId.toString() !== req.user._id.toString())
+          return res.redirect("/")
+
         res.render("edit", {
           style: "create.css",
           script: "edit.js",
@@ -58,6 +66,11 @@ module.exports = {
   putRestaurant: (req, res) => {
     const id = req.params.id
     const restaurant = req.body
+
+    // Only can edit owned restaurant
+    if (restaurant.userId.toString() !== req.user._id.toString())
+      return res.redirect("/")
+
     return Restaurant.findByIdAndUpdate(id, restaurant)
       .then(res.redirect(`/restaurants/${id}`))
       .catch((error) => {
@@ -69,7 +82,13 @@ module.exports = {
   deleteRestaurant: (req, res) => {
     const id = req.params.id
     return Restaurant.findByIdAndDelete(id)
-      .then(res.redirect("/"))
+      .then(() => {
+        // Only can delete owned restaurant
+        if (restaurant.userId.toString() !== req.user._id.toString())
+          return res.redirect("/")
+
+        return res.redirect("/")
+      })
       .catch((error) => {
         console.log(error)
       })

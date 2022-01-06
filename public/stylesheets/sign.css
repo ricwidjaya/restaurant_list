@@ -21,3 +21,12 @@
 .btn-fb:hover {
   background-color: #1877f2;
 }
+
+.btn-google {
+  background-color: #3aaa57;
+  color: white;
+}
+
+.btn-google:hover {
+  background-color: #3aaa57;
+}

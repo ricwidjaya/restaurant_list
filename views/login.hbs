@@ -3,18 +3,6 @@
     <h1>Sign In</h1>
     <div class="card-body">
 
-      {{#if success_messages}}
-        <div class="alert alert-success" role="alert">
-          {{success_messages}}
-        </div>
-      {{/if}}
-
-      {{#if error_messages}}
-        <div class="alert alert-danger" role="alert">
-          {{error_messages}}
-        </div>
-      {{/if}}
-
       <form action="/login" method="POST">
         <div class="form-group">
           <label for="exampleInputEmail1">Email address</label>
@@ -43,7 +31,7 @@
           </button>
         </a>
         <a href="/auth/google">
-          <button type="button" class="btn btn-fb btn-block">
+          <button type="button" class="btn btn-google btn-block">
             Log in With Google
           </button>
         </a>

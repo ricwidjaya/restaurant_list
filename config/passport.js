@@ -82,7 +82,6 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       const { email, name } = profile._json
-      console.log(email, name)
       User.findOne({ email }).then((user) => {
         // Email has registered
         if (user) return done(null, user)
