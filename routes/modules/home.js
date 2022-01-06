@@ -11,8 +11,9 @@ router.get(
   "/auth/facebook/callback",
   passport.authenticate("facebook", {
     failureRedirect: "/login",
-    successRedirect: "/"
-  })
+    failureFlash: true
+  }),
+  userController.login
 )
 
 router.get(
@@ -27,8 +28,9 @@ router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/login",
-    successRedirect: "/"
-  })
+    failureFlash: true
+  }),
+  userController.login
 )
 
 router.get(

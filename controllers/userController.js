@@ -51,6 +51,7 @@ module.exports = {
 
   logout: (req, res) => {
     req.logout()
+    req.flash("success_messages", "You've been logged out!")
     return res.redirect("/login")
   }
 }

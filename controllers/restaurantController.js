@@ -37,6 +37,7 @@ module.exports = {
     const restaurant = req.body
     restaurant.userId = req.user._id
     Restaurant.create(restaurant)
+    req.flash("success_messages", `${restaurant.name} created.`)
     return res.redirect("/")
   },
 
@@ -67,12 +68,11 @@ module.exports = {
     const id = req.params.id
     const restaurant = req.body
 
-    // Only can edit owned restaurant
-    if (restaurant.userId.toString() !== req.user._id.toString())
-      return res.redirect("/")
-
     return Restaurant.findByIdAndUpdate(id, restaurant)
-      .then(res.redirect(`/restaurants/${id}`))
+      .then(() => {
+        req.flash("success_messages", `${restaurant.name} updated.`)
+        res.redirect(`/restaurants/${id}`)
+      })
       .catch((error) => {
         console.log(error)
       })
@@ -81,12 +81,10 @@ module.exports = {
   // Delete restaurant
   deleteRestaurant: (req, res) => {
     const id = req.params.id
-    return Restaurant.findByIdAndDelete(id)
-      .then(() => {
-        // Only can delete owned restaurant
-        if (restaurant.userId.toString() !== req.user._id.toString())
-          return res.redirect("/")
 
+    return Restaurant.findByIdAndDelete(id)
+      .then((restaurant) => {
+        req.flash("success_messages", `${restaurant.name} deleted.`)
         return res.redirect("/")
       })
       .catch((error) => {

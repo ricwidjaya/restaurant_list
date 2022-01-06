@@ -65,7 +65,12 @@ passport.use(
             return done(null, user)
           })
           .catch((err) => {
-            done(err, false)
+            done(
+              err,
+              false,
+              req.flash("error_messages", "Something went wrong!")
+            )
+            return res.redirect("/")
           })
       })
     }
